@@ -1,189 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="et">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Floppa Projektid</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Floppa Fan — Galerii</title>
+  <meta name="description" content="Professionaalne, responsiivne Floppa-galerii täis Floppa pilte." />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    :root {
-      --floppa-brown: #6f4e37;
-      --floppa-light: #d9c4b2;
-      --floppa-dark: #3b2f2f;
-      --floppa-accent: #a67953;
-      --floppa-hover: #8e6b52;
-      --text-light: #f4ede8;
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#ffb86b; /* warm accent */
+      --muted:#9aa6b2;
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(255,184,107,0.06), transparent), linear-gradient(180deg, #071027 0%, #07121a 100%), var(--bg);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.35;
     }
 
-    * {
-      box-sizing: border-box;
+    /* Layout */
+    .site{min-height:100vh;display:flex;flex-direction:column}
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(255,255,255,0.03);
     }
-
-    body {
-      margin: 0;
-      background-color: var(--floppa-dark);
-      color: var(--text-light);
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      /* Taustapilt */
-      background-image: url('https://i.imgur.com/4AiXzf8.jpeg'); /* Näide Floppa pildist */
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      background-attachment: fixed;
-
-      /* Overlay tumeduse jaoks */
-      position: relative;
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8a5b);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0a1018;box-shadow:0 8px 30px rgba(0,0,0,0.6);
     }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(59, 47, 47, 0.75); /* tumedam overlay */
-      z-index: 0;
-    }
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;font-size:14px}
+    nav a.primary{background:linear-gradient(90deg, rgba(255,184,107,0.12), rgba(255,138,91,0.06));color:var(--accent)}
 
-    main, header, footer, .project-card {
-      position: relative;
-      z-index: 1; /* üle overlay */
-    }
+    main{flex:1;padding:32px}
+    .hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:20px}
+    .hero .hero-left h2{font-size:28px;margin:0 0 6px}
+    .hero .hero-left p{margin:0;color:var(--muted)}
 
-    header {
-      background: var(--floppa-brown);
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      position: relative;
-      user-select: none;
-    }
+    .controls{display:flex;gap:12px;align-items:center}
+    .search{padding:10px 12px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:inherit;min-width:220px}
+    .filter{padding:10px 12px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
 
-    header::after {
-      content: "🐱‍👤 Floppa Style";
-      display: block;
-      font-size: 1rem;
-      color: var(--floppa-light);
-      margin-top: 0.5rem;
-      font-weight: 400;
-      opacity: 0.8;
+    /* Gallery grid */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:10px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 8px 30px rgba(2,6,23,0.6);
+      transition:transform .18s ease, box-shadow .18s ease;
+      border:1px solid rgba(255,255,255,0.03);
     }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(2,6,23,0.7)}
+    .card img{width:100%;height:220px;object-fit:cover;border-radius:12px;display:block}
+    .meta{display:flex;justify-content:space-between;align-items:center;padding-top:10px}
+    .meta .title{font-weight:600;font-size:14px}
+    .meta .tag{font-size:12px;color:var(--muted)}
 
-    main {
-      flex-grow: 1;
-      max-width: 960px;
-      margin: 3rem auto 4rem;
-      padding: 0 1rem;
-    }
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);z-index:60;padding:24px}
+    .lightbox.open{display:flex}
+    .lightbox .image-wrap{max-width:1200px;width:100%;max-height:90vh;background:linear-gradient(180deg,#071027,#07121a);padding:18px;border-radius:12px}
+    .lightbox img{width:100%;height:auto;border-radius:8px; display:block}
+    .lightbox .caption{color:var(--muted);margin-top:8px;text-align:left}
+    .lightbox .close{position:absolute;top:22px;right:22px;background:transparent;border:none;color:#fff;font-size:20px;padding:10px;border-radius:8px}
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
+    footer{padding:18px 28px;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);display:flex;justify-content:space-between;gap:12px}
 
-    .project-card {
-      background: var(--floppa-brown);
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      cursor: default;
-    }
+    /* Responsiveness */
+    @media (max-width:1100px){.gallery{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:800px){.gallery{grid-template-columns:repeat(2,1fr)} .hero{grid-template-columns:1fr} .card img{height:180px}}
+    @media (max-width:480px){.gallery{grid-template-columns:1fr} .brand h1{font-size:16px}.logo{width:48px;height:48px}}
 
-    .project-card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
-      cursor: pointer;
-    }
-
-    .project-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      color: var(--floppa-light);
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-      user-select: text;
-    }
-
-    .project-desc {
-      flex-grow: 1;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: #dbcab5cc;
-      margin-bottom: 1.4rem;
-      user-select: text;
-    }
-
-    .project-link {
-      align-self: flex-start;
-      text-decoration: none;
-      background: var(--floppa-accent);
-      color: var(--floppa-dark);
-      padding: 0.6rem 1.4rem;
-      border-radius: 50px;
-      font-weight: 600;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-
-    .project-link:hover,
-    .project-link:focus {
-      background-color: var(--floppa-hover);
-      color: var(--text-light);
-      outline: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background-color: var(--floppa-brown);
-      font-size: 0.95rem;
-      color: var(--floppa-light);
-      user-select: none;
-      letter-spacing: 0.03em;
-    }
-
-    @media (max-width: 400px) {
-      .project-card {
-        padding: 1.2rem 1.5rem;
-      }
-    }
+    /* small utilities */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
-  <header>
-    Minu Floppa Projektid
-  </header>
-  <main>
-    <div class="projects-grid">
-      <div class="project-card" tabindex="0">
-        <div class="project-title">Floppa Portfolio</div>
-        <div class="project-desc">Klassikaline portfoolio, kus Floppa vibe koos puhta disainiga.</div>
-        <a href="https://github.com/koht/floppa-portfolio" target="_blank" class="project-link" rel="noopener noreferrer">Vaata projekti</a>
+  <div class="site">
+    <header>
+      <div class="brand">
+        <div class="logo">F</div>
+        <div>
+          <h1>Floppa Fan</h1>
+          <p>Professionaalne Floppa galeriileht</p>
+        </div>
       </div>
+      <nav>
+        <a href="#gallery" class="primary">Galerii</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-      <div class="project-card" tabindex="0">
-        <div class="project-title">Floppa Gallery</div>
-        <div class="project-desc">Pildigalerii Floppadele — kõik su lemmikkarvased koos.</div>
-        <a href="https://github.com/koht/floppa-gallery" target="_blank" class="project-link" rel="noopener noreferrer">Vaata projekti</a>
-      </div>
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <h2>Tervitus, Floppa-sõber!</h2>
+          <p>Siin on puhas, professionaalne galerii kõigist sinu lemmik-Floppadest. Klõpsa pilti, et näha suurt versiooni, ja kasuta otsingut või filtrit.</p>
+        </div>
+        <div class="controls">
+          <input class="search" id="search" placeholder="Otsi: floppa, lõbus, portree..." aria-label="Otsi pilte" />
+          <select id="filter" class="filter" aria-label="Filtreeri" >
+            <option value="all">Kõik</option>
+            <option value="portrait">Portreed</option>
+            <option value="funny">Naljakad</option>
+            <option value="hd">HD</option>
+          </select>
+        </div>
+      </section>
 
-      <!-- Lisa oma projektid siia -->
-    </div>
-  </main>
-  <footer>
-    © 2025 Floppa Fan
-  </footer>
-</body>
-</html>
+      <section id="gallery" class="gallery" aria-live="polite">
+        <!-- IMPORTANT: replace src with your Floppa image files or hosted URLs -->
+
+        <article class="card" data-tags="portrait hd">
+          <img loading="lazy" src="images/floppa1.jpg" alt="Floppa lähedalt: portree" data-full="images/floppa1-large.jpg">
+          <div class="meta">
+            <div class="title">Floppa portree #1</div>
+            <div class="tag">Portrait · HD</div>
+          </div>
+        </article>
+
+        <article class="card" data-tags="funny">
+          <img loading="lazy" src="images/floppa2.jpg" alt="Naljakas Floppa meme" data-full="images/floppa2-large.jpg">
+          <div class="meta">
+            <div class="title">Floppa meme #2</div>
+            <div class="tag">Funny</div>
+          </div>
+        </article>
+
+        <article class="card" data-tags="portrait">
+          <img loading="lazy" src="images/floppa3.jpg" alt="Floppa portree kõrval olev taust" data-full="images/floppa3-large.jpg">
+          <div class="meta">
+            <div class="title">Floppa portree #3</div>
+            <div class="tag">Portrait</div>
+          </div>
+        </article>
+
+        <article class="card" data-tags="hd funny">
+          <img loading="lazy" src="images/floppa4.jpg" alt="HD Floppa koomiline hetk" data-full="images/floppa4-large.jpg">
+          <div class="meta">
+            <div class="title">Floppa #4</div>
+            <div class="tag">HD · Funny</div>
+          </div>
+        </article>
+
+        <!-- duplicated cards as example — copy/paste and change src/alt/data-full -->
+        <article class="card" data-tags="portrait">
+          <img loading="lazy" src="images/floppa5.jpg" alt="Floppa magab" data-full="images/floppa5-large.jpg">
+          <div class="meta">
+            <div class="title">Floppa sleeping</div>
+            <div class="tag">Portrait</div>
+          </div>
+        </article>
+
+        <article class="card" data-tags="funny">
+          <img loading="lazy" src="images/floppa6.jpg" alt="Naljakas floppa nägu" data-full="images/floppa6-large.jpg">
+          <div class="meta">
+            <div class="title">Silly Floppa</div>
+            <div class="tag">Funny</div>
+          </div>
+        </article>
+
+        <!-- Add as many as you want -->
+      </section>
+    </main>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+      <b
