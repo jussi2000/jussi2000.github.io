@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minu Projektid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #4a90e2;
+    }
+
+    .project-desc {
+      flex-grow: 1;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .project-link {
+      text-decoration: none;
+      background-color: #4a90e2;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .project-link:hover {
+      background-color: #357ABD;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Minu Projektid</header>
+  <main>
+    <div class="projects-grid">
+      <!-- Näidisprojektid -->
+      <div class="project-card">
+        <div class="project-title">Projekt 1</div>
+        <div class="project-desc">See on näidisprojekt, kus demonstreerin HTML ja CSS kasutamist.</div>
+        <a href="https://github.com/koht/projekt1" target="_blank" class="project-link">Vaata projekti</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-title">Projekt 2</div>
+        <div class="project-desc">Veebirakendus, mis kasutab JavaScripti interaktiivsuse lisamiseks.</div>
+        <a href="https://github.com/koht/projekt2" target="_blank" class="project-link">Vaata projekti</a>
+      </div>
+
+      <!-- Lisa siia oma projektid samas formaadis -->
+    </div>
+  </main>
+  <footer>© 2025 Minu Nimi</footer>
+</body>
+</html>
