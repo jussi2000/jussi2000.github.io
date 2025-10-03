@@ -3,109 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minu Projektid</title>
+  <title>Floppa Projektid</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    :root {
+      --floppa-brown: #6f4e37;
+      --floppa-light: #d9c4b2;
+      --floppa-dark: #3b2f2f;
+      --floppa-accent: #a67953;
+      --floppa-hover: #8e6b52;
+      --text-light: #f4ede8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f9;
       margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    header {
-      background-color: #4a90e2;
-      color: white;
-      padding: 1.5rem 2rem;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    main {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background-color: var(--floppa-dark);
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
+    header {
+      background: var(--floppa-brown);
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      position: relative;
+      user-select: none;
+    }
+
+    header::after {
+      content: "🐱‍👤 Floppa Style";
+      display: block;
+      font-size: 1rem;
+      color: var(--floppa-light);
+      margin-top: 0.5rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--floppa-brown);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+    }
+
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+      cursor: pointer;
     }
 
     .project-title {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: #4a90e2;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      color: var(--floppa-light);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      user-select: text;
     }
 
     .project-desc {
       flex-grow: 1;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      line-height: 1.4;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: #dbcab5cc;
+      margin-bottom: 1.4rem;
+      user-select: text;
     }
 
     .project-link {
+      align-self: flex-start;
       text-decoration: none;
-      background-color: #4a90e2;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      font-weight: bold;
-      text-align: center;
-      transition: background-color 0.2s ease;
+      background: var(--floppa-accent);
+      color: var(--floppa-dark);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      user-select: none;
     }
 
-    .project-link:hover {
-      background-color: #357ABD;
+    .project-link:hover,
+    .project-link:focus {
+      background-color: var(--floppa-hover);
+      color: var(--text-light);
+      outline: none;
     }
 
     footer {
       text-align: center;
-      padding: 1rem 0;
-      color: #777;
-      font-size: 0.9rem;
+      padding: 1.5rem 1rem;
+      background-color: var(--floppa-brown);
+      font-size: 0.95rem;
+      color: var(--floppa-light);
+      user-select: none;
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 400px) {
+      .project-card {
+        padding: 1.2rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>Minu Projektid</header>
+  <header>
+    Minu Floppa Projektid
+  </header>
   <main>
     <div class="projects-grid">
-      <!-- Näidisprojektid -->
-      <div class="project-card">
-        <div class="project-title">Projekt 1</div>
-        <div class="project-desc">See on näidisprojekt, kus demonstreerin HTML ja CSS kasutamist.</div>
-        <a href="https://github.com/koht/projekt1" target="_blank" class="project-link">Vaata projekti</a>
+      <div class="project-card" tabindex="0">
+        <div class="project-title">Floppa Portfolio</div>
+        <div class="project-desc">Klassikaline portfoolio, kus Floppa vibe koos puhta disainiga.</div>
+        <a href="https://github.com/koht/floppa-portfolio" target="_blank" class="project-link" rel="noopener noreferrer">Vaata projekti</a>
       </div>
 
-      <div class="project-card">
-        <div class="project-title">Projekt 2</div>
-        <div class="project-desc">Veebirakendus, mis kasutab JavaScripti interaktiivsuse lisamiseks.</div>
-        <a href="https://github.com/koht/projekt2" target="_blank" class="project-link">Vaata projekti</a>
+      <div class="project-card" tabindex="0">
+        <div class="project-title">Floppa Gallery</div>
+        <div class="project-desc">Pildigalerii Floppadele — kõik su lemmikkarvased koos.</div>
+        <a href="https://github.com/koht/floppa-gallery" target="_blank" class="project-link" rel="noopener noreferrer">Vaata projekti</a>
       </div>
 
-      <!-- Lisa siia oma projektid samas formaadis -->
+      <!-- Lisa oma projektid siia -->
     </div>
   </main>
-  <footer>© 2025 Minu Nimi</footer>
+  <footer>
+    © 2025 Floppa Fan
+  </footer>
 </body>
 </html>
