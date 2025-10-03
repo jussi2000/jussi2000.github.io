@@ -29,6 +29,29 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      /* Taustapilt */
+      background-image: url('https://i.imgur.com/4AiXzf8.jpeg'); /* Näide Floppa pildist */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+
+      /* Overlay tumeduse jaoks */
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(59, 47, 47, 0.75); /* tumedam overlay */
+      z-index: 0;
+    }
+
+    main, header, footer, .project-card {
+      position: relative;
+      z-index: 1; /* üle overlay */
     }
 
     header {
